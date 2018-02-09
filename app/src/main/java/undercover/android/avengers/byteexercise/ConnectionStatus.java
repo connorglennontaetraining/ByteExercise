@@ -7,6 +7,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
+import static undercover.android.avengers.byteexercise.ByteUtils.combineByteArrays;
+import static undercover.android.avengers.byteexercise.ByteUtils.extractBits;
+
 /**
  * Created by Connor Glennon on 09/02/2018.
  * Code belongs to The App Experts.
@@ -41,11 +44,19 @@ public class ConnectionStatus {
 
     private byte[] sixteenBits = null;
 
-    ConnectionStatus(byte[] sixteenBits){
+    public ConnectionStatus(byte a, byte b){
+        this(extractBits(a), extractBits(b));
+    }
+
+    public ConnectionStatus(byte[] inputA, byte[] inputB){
+        this(combineByteArrays(inputA, inputB));
+    }
+
+    public ConnectionStatus(byte[] sixteenBits){
         this.sixteenBits = sixteenBits;
     }
 
-    private String getRunProfile() {
+    public String getRunProfile() {
         switch(concatBytes(Arrays.copyOfRange(sixteenBits, 6, 10))){
             case 1:
                 return QUICK_RUN;
@@ -54,7 +65,7 @@ public class ConnectionStatus {
         }
     }
 
-    private String getSessionStatus() {
+    public String getSessionStatus() {
         switch(concatBytes(Arrays.copyOfRange(sixteenBits, 3, 5))){
             case 0:
                 return IDLE;
@@ -69,7 +80,7 @@ public class ConnectionStatus {
         }
     }
 
-    private byte concatBytes(byte[] array){
+    public byte concatBytes(byte[] array){
         byte result = 0;
         for(int i = 0; i < array.length; i++){
             result += array[i] * Math.pow(2, i);
@@ -77,15 +88,15 @@ public class ConnectionStatus {
         return result;
     }
 
-    private boolean getHrmStatus() {
+    public boolean getHrmStatus() {
         return sixteenBits[2] == 1;
     }
 
-    private boolean getGpsStatus() {
+    public boolean getGpsStatus() {
         return sixteenBits[1] == 1;
     }
 
-    private boolean getPuckStatus() {
+    public boolean getPuckStatus() {
         return sixteenBits[0] == 1;
     }
 

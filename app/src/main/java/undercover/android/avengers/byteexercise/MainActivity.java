@@ -12,12 +12,19 @@ import android.util.Log;
  */
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final int MAX_INPUT = 255;
+
+    int inputA = 128;
+    int inputB = MAX_INPUT - inputA;
+
+    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Exercise exercise = new Exercise((byte) 64, (byte) 0);
-        Log.i(this.getClass().getSimpleName(), exercise.getStatus().printString());
+        Log.i(this.getClass().getSimpleName(), new ConnectionStatus((byte) 64, (byte) 0).printString());
     }
 }
