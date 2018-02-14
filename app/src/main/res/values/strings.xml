@@ -5,4 +5,10 @@
     <string name="input_placeholder">0</string>
     <string name="status_placeholder">0000000000000000</string>
     <string name="bits_placeholder">00000000</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="placeholder">PlaceHolder</string>
+    <string name="bit_representation_placeholder">00000000</string>
+    <string name="combined_bit_representation">%1$s%2$s</string>
 </resources>
